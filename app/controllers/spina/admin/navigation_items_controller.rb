@@ -5,7 +5,7 @@ module Spina
       
       def new
         @navigation_item = @navigation.navigation_items.new(parent_id: params[:parent_id])
-        @pages = Page.sorted
+        @pages = current_account.pages.sorted
       end
       
       def create
