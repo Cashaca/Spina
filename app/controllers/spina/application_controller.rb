@@ -13,6 +13,10 @@ private
     Spina::Account.with_domain_name_regex.each do |account|
       Spina::Current.account ||= account if request.domain =~ /#{Regexp.quote(account.domain_name_regex)}/
     end
+    if cookies[:current_account_id]
+      # set by admin when working in admin views
+      Spina::Current.account ||= ::Spina::Account.where(id: cookies[:current_account_id]).first
+    end
     Spina::Current.account ||= Spina::Account.first
     Spina::Current.account.view_context = view_context
     return Spina::Current.account
