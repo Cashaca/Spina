@@ -9,7 +9,6 @@ module Spina
       
       before_action :set_locale
       before_action :set_current_page
-      before_action :set_current_account
     end
 
     def show
@@ -33,20 +32,15 @@ module Spina
         Spina::Current.page.view_context = view_context
       end
 
-      def set_current_account
-        Spina::Current.account = Spina::Account.first
-        Spina::Current.account.view_context = view_context
-      end
-
       def page_by_locale(locale)
         I18n.with_locale(locale) do
-          Page.i18n.find_by!(materialized_path: spina_request_path)
+          current_account.pages.i18n.find_by!(materialized_path: spina_request_path)
         end
       end
 
       def page
         @page = if action_name == 'homepage'
-          Page.find_by!(name: 'homepage')
+          current_account.pages.find_by!(name: 'homepage')
         else 
           page_by_locale(I18n.locale) || page_by_locale(I18n.default_locale)
         end

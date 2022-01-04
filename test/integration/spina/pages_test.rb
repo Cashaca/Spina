@@ -7,19 +7,19 @@ module Spina
 
       I18n.locale = :en
       @routes = Engine.routes
-      FactoryBot.create :account
+      @account = FactoryBot.create :account
 
       # Create translations for each page
-      @homepage = Spina::Page.find_by(name: 'homepage')
+      @homepage = FactoryBot.create :homepage, account: @account
       FactoryBot.create :page_translation,
         spina_page_id: @homepage.id, title: 'Beginpagina',
         materialized_path: '/nl', locale: 'nl'
-      @about_page = FactoryBot.create :about_page
+      @about_page = FactoryBot.create :about_page, account: @account
       page = FactoryBot.create :page_translation,
         spina_page_id: @about_page.id, title: 'Over ons',
         materialized_path: '/nl/over-ons', locale: 'nl'
 
-      @demo_page = Spina::Page.find_by(name: 'demo')
+      @demo_page = FactoryBot.create :demo_page, account: @account
       FactoryBot.create :page_translation,
         spina_page_id: @demo_page.id, title: 'Demo',
         materialized_path: '/nl/demo', locale: 'nl'
@@ -47,8 +47,8 @@ module Spina
       @image.file.attach(io: spina_png, filename: 'spina.png')
       
       image_part = Spina::Parts::Image.new(name: "image", title: "Image", image_id: @image.id, signed_blob_id: @image.file.blob.signed_id, alt: "", filename: "spina.png")
-      
-      @demo_page.update(en_content: [image_part]) 
+      @demo_page.update(en_content: [image_part])
+      puts @demo_page.inspect
       get "/demo"
       assert_select 'img'
     end

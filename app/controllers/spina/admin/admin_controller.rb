@@ -31,6 +31,19 @@ module Spina
           prepend_view_path Spina::Engine.root.join('app/views/spina/admin')
         end
 
+        def current_account
+          Spina::Current.account = nil
+          if cookies[:current_account_id]
+            Spina::Current.account ||= ::Spina::Account.where(id: cookies[:current_account_id]).first
+          else
+            Spina::Account.with_domain_name_regex.each do |account|
+              Spina::Current.account ||= account if request.domain =~ /#{Regexp.quote(account.domain_name_regex)}/
+            end
+            Spina::Current.account ||= ::Spina::Account.first
+          end
+          return Spina::Current.account
+        end
+
     end
   end
 end

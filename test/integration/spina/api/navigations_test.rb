@@ -9,8 +9,8 @@ module Spina
         FactoryBot.reload
         @routes = Engine.routes
         @account = FactoryBot.create :account
-        @page = FactoryBot.create :page, title: "A page"
-        @navigation = FactoryBot.create(:navigation) do |navigation|
+        @page = FactoryBot.create :page, title: "A page", account: @account
+        @navigation = FactoryBot.create(:navigation, account: @account) do |navigation|
           FactoryBot.create_list(:navigation_item, 1, navigation: navigation, page: @page)
         end
       end

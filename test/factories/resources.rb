@@ -4,6 +4,7 @@ FactoryBot.define do
     factory :breweries do
       name { 'breweries' }
       label { 'Breweries' }
+      association :account, factory: :account
     end
 
   end

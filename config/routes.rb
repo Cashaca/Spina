@@ -26,12 +26,14 @@ Spina::Engine.routes.draw do
   namespace :admin, path: Spina.config.backend_path do
     root to: "pages#index"
 
-    resource :account
     resource :theme, controller: :theme
 
     get "/settings/:plugin", to: "settings#edit", as: :edit_settings
     patch "/settings/:plugin", to: "settings#update", as: :settings
 
+    resources :accounts do
+      get 'select', :on => :member
+    end
     resources :users
     
     # Sessions

@@ -2,6 +2,7 @@ module Spina
   class Resource < ApplicationRecord
     extend Mobility
 
+    belongs_to :account
     has_many :pages, dependent: :restrict_with_exception
 
     after_commit :update_resource_pages, on: [:update]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_191444) do
+ActiveRecord::Schema.define(version: 17) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_191444) do
     t.datetime "updated_at", null: false
     t.boolean "robots_allowed", default: false
     t.jsonb "json_attributes"
+    t.string "domain_name_regex"
   end
 
   create_table "spina_attachment_collections", id: :serial, force: :cascade do |t|
@@ -141,6 +142,8 @@ ActiveRecord::Schema.define(version: 2021_01_08_191444) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_spina_navigations_on_account_id"
     t.index ["name"], name: "index_spina_navigations_on_name", unique: true
   end
 
@@ -192,6 +195,8 @@ ActiveRecord::Schema.define(version: 2021_01_08_191444) do
     t.boolean "active", default: true
     t.integer "resource_id"
     t.jsonb "json_attributes"
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_spina_pages_on_account_id"
     t.index ["resource_id"], name: "index_spina_pages_on_resource_id"
   end
 
@@ -204,6 +209,8 @@ ActiveRecord::Schema.define(version: 2021_01_08_191444) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "slug"
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_spina_resources_on_account_id"
     t.index ["parent_page_id"], name: "index_spina_resources_on_parent_page_id"
   end
 

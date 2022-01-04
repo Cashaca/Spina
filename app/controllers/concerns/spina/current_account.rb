@@ -8,9 +8,10 @@ module Spina
     end
   
     private
-    
-      def current_account
-        Spina::Current.account ||= ::Spina::Account.first
+
+      def select_new_current_account(account)
+        return if account.nil?
+        cookies.permanent[:current_account_id] = account.id
       end
         
   end

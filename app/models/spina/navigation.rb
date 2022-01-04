@@ -1,5 +1,6 @@
 module Spina
   class Navigation < ApplicationRecord
+    belongs_to :account
     has_many :navigation_items, dependent: :destroy
     has_many :pages, through: :navigation_items
 

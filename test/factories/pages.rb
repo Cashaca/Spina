@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :page, class: "Spina::Page" do
     draft { false }
     active { true }
+    association :account, factory: :account
 
     factory :homepage do
       name { 'homepage' }

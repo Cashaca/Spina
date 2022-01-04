@@ -38,7 +38,7 @@
         <% end %>
 
         <% nav.links do %>
-          <%= render Spina::MainNavigation::LinkComponent.new(t('spina.settings.general'), spina.edit_admin_account_path, active: controller_name == "accounts") %>
+          <%= render Spina::MainNavigation::LinkComponent.new(t('spina.settings.general'), spina.edit_admin_account_path(current_account), active: controller_name == "accounts") %>
           <%= render Spina::MainNavigation::LinkComponent.new(t('spina.website.theme'), spina.edit_admin_theme_path, active: controller_name == "theme") %>
 
           <% if Spina.config.authentication == "Spina::Authentication::Sessions" %>

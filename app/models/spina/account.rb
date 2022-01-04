@@ -5,11 +5,17 @@ module Spina
     include Partable
     include TranslatedContent
 
+    has_many :pages
+    has_many :navigations
+    has_many :resources
+
     serialize :preferences
 
     after_save :bootstrap_website
     
     validates :name, presence: true
+
+    scope :with_domain_name_regex , -> { where.not(domain_name_regex:nil).where.not(domain_name_regex: '') }
 
     def to_s
       name
@@ -44,7 +50,7 @@ module Spina
 
     def bootstrap_navigations(theme)
       theme.navigations.each_with_index do |navigation, index|
-        Navigation.where(name: navigation[:name]).first_or_create.update(navigation.merge(position: index))
+        self.navigations.where(name: navigation[:name]).first_or_create.update(navigation.merge(position: index))
       end
     end
 
@@ -56,24 +62,24 @@ module Spina
 
     def bootstrap_resources(theme)
       theme.resources.each do |resource|
-        Resource.where(name: resource[:name]).first_or_create.update(resource)
+        self.resources.where(name: resource[:name]).first_or_create.update(resource)
       end
     end
 
     def find_or_create_custom_pages(theme)
       theme.custom_pages.each do |page|
-        Page.where(name: page[:name])
+        self.pages.where(name: page[:name])
             .first_or_create(title: page[:title])
             .update(view_template: page[:view_template], deletable: page[:deletable])
       end
     end
 
     def deactivate_unused_view_templates(theme)
-      Page.active.where.not(view_template: theme.view_templates.map{|h|h[:name]}).update_all(active: false)
+      self.pages.active.where.not(view_template: theme.view_templates.map{|h|h[:name]}).update_all(active: false)
     end
 
     def activate_used_view_templates(theme)
-      Page.where(active: false, view_template: theme.view_templates.map{|h|h[:name]}).update_all(active: true)
+      self.pages.where(active: false, view_template: theme.view_templates.map{|h|h[:name]}).update_all(active: true)
     end
 
   end

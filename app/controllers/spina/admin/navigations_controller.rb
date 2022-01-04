@@ -7,14 +7,14 @@ module Spina
       admin_section :content
       
       def index
-        navigation = Spina::Navigation.order(:position).first
+        navigation = current_account.navigations.order(:position).first
         if navigation
           redirect_to spina.edit_admin_navigation_path(navigation)
         end
       end
 
       def edit
-        @navigations = Spina::Navigation.order(:position)
+        @navigations = current_account.navigations.order(:position)
         render layout: 'spina/admin/admin'
       end
 

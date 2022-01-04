@@ -8,7 +8,8 @@ module Spina
 
         @routes = Engine.routes
         @account = FactoryBot.create :account
-        @resource = FactoryBot.create :breweries
+        @resource = FactoryBot.create :breweries, account: @account
+        @resource.save
       end
       
       test "list resources" do

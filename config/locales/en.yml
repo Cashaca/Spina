@@ -21,6 +21,7 @@ en:
         linkedin: LinkedIn
         logo: Logo
         name: Website name
+        domain_name_regex: Domain name regex to select account (if multiple accounts)
         phone: Phone
         postal_code: Postal code
         robots_allowed: Visible in search engines
@@ -111,12 +112,19 @@ en:
         url: Vimeo URL
   spina:
     accounts:
+      cannot_be_created: The account cannot be saved
+      delete: Delete account
+      delete_confirmation_html: Are you sure you want to delete the account <strong>%{account}</strong>?
+      deleted: Account deleted
+      new: New account
       contact_details: Contact details
       contact_details_description: Email and phone
       couldnt_be_saved: Account couldn't be saved
       name_description: Your website name
       save: Save account
       saved: Account saved
+      selected: Account %{account} selected
+      select: Select this account
     ago: ago
     attachments:
       choose_attachment: Choose attachment
@@ -293,6 +301,7 @@ en:
     preferences:
       Analytics: Analytics
       account: General
+      accounts: General
       account_description: Personal preferences
       account_save: Save preferences
       analytics: Analytics and search

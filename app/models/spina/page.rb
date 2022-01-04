@@ -12,6 +12,8 @@ module Spina
     # Orphaned pages are adopted by parent pages if available, otherwise become root
     has_ancestry orphan_strategy: :adopt
 
+    belongs_to :account
+
     # Pages can belong to navigations (optional)
     has_many :navigation_items, dependent: :destroy
     has_many :navigations, through: :navigation_items

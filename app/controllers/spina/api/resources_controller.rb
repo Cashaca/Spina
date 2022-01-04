@@ -4,12 +4,12 @@ module Spina
       include Paginable
       
       def index
-        resources = Resource.order(:id)
+        resources = current_account.resources.order(:id)
         render json: Spina::Api::ResourceSerializer.new(*pagination(resources)).serializable_hash.to_json
       end
       
       def show
-        @resource = Resource.find(params[:id])
+        @resource = current_account.resources.find(params[:id])
         render json: Spina::Api::ResourceSerializer.new(@resource).serializable_hash.to_json
       end
       

@@ -13,18 +13,18 @@ module Spina
           @page_templates = Spina::Current.theme.new_page_templates(resource: @resource)
           @pages = @resource.pages.active.roots.includes(:translations)
         else
-          @pages = Page.active.sorted.roots.main.includes(:translations)
+          @pages = current_account.pages.active.sorted.roots.main.includes(:translations)
           @page_templates = Spina::Current.theme.new_page_templates
         end
       end
 
       def new
         resource = Resource.find_by(id: params[:resource_id])
-        @page = Page.new(view_template: params[:view_template], resource: resource)
+        @page = current_account.pages.new(view_template: params[:view_template], resource: resource)
       end
 
       def create
-        @page = Page.new(page_params.merge(draft: true))
+        @page = current_account.pages.new(page_params.merge(draft: true))
         if @page.save
           redirect_to spina.edit_admin_page_url(@page)
         else
