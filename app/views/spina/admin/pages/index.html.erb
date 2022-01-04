@@ -20,7 +20,7 @@
           <%=t 'spina.website.main' %>
         <% end %>
         
-        <% Spina::Resource.order(:name).each do |resource| %>
+        <% current_account.resources.order(:name).each do |resource| %>
         
           <%= render Spina::UserInterface::TabLinkComponent.new(spina.admin_pages_path(resource_id: resource.id), active: @resource == resource) do %>
             <%= heroicon('collection', class: 'h-4 w-4 mr-1 -ml-1 opacity-75') %>
