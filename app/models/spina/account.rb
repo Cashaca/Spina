@@ -70,7 +70,7 @@ module Spina
       theme.custom_pages.each do |page|
         self.pages.where(name: page[:name])
             .first_or_create(title: page[:title])
-            .update(view_template: page[:view_template], deletable: page[:deletable])
+            .update(view_template: page[:view_template], deletable: page[:deletable], layout_template: page[:layout_template])
       end
     end
 
