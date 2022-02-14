@@ -140,7 +140,7 @@ module Spina
       end
       
       def duplicate_materialized_path?
-        self.class.where.not(id: id).i18n.where(materialized_path: materialized_path).exists?
+        self.account.pages.where.not(id: id).i18n.where(materialized_path: materialized_path).exists?
       end
 
   end
