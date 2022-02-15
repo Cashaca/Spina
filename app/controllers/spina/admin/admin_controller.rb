@@ -32,8 +32,6 @@ module Spina
         end
 
         def current_account
-          puts "current_account ADMIN"
-          puts "cookies[:current_account_id: #{cookies[:current_account_id]}"
           Spina::Current.account = nil
           if cookies[:current_account_id]
             Spina::Current.account = ::Spina::Account.where(id: cookies[:current_account_id]).first
@@ -42,9 +40,7 @@ module Spina
               Spina::Current.account ||= account if request.domain =~ /#{Regexp.quote(account.domain_name_regex)}/
             end
           end
-          puts "Spina::Current.account: #{Spina::Current.account.inspect}"
           Spina::Current.account ||= ::Spina::Account.first
-          puts "Spina::Current.account backup (first): #{Spina::Current.account.inspect}"
           return Spina::Current.account
         end
 
