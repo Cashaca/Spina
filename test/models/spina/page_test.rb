@@ -49,19 +49,21 @@ module Spina
     end
     
     test 'append decimal to duplicate paths' do
-      page = FactoryBot.create :about_page, title: "About"
+      account = FactoryBot.create :account
+      page = FactoryBot.create :about_page, title: "About", account: account
       assert_equal "/about", page.materialized_path
       
-      duplicate_page = FactoryBot.create :about_page, title: "About"
+      duplicate_page = FactoryBot.create :about_page, title: "About", account: account
       assert_equal "/about-1", duplicate_page.materialized_path
     end
     
     test 'append decimal to multiple duplicate paths' do
+      account = FactoryBot.create :account
       2.times do
-        FactoryBot.create :about_page, title: "About"
+        page = FactoryBot.create :about_page, title: "About", account: account
       end
       
-      page = FactoryBot.create :about_page, title: "About"
+      page = FactoryBot.create :about_page, title: "About", account: account
       assert_equal "/about-2", page.materialized_path
     end
     

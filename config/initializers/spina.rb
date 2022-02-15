@@ -31,6 +31,12 @@ Spina.configure do |config|
   # The parent controller all frontend Spina controllers inherit from
   # Defaults to ApplicationController
   # config.frontend_parent_controller = "ApplicationController"
+
+   # Parent controller
+  # ===============
+  # The method called if a page is not found in the PagesController
+  # Defaults to render_404
+  # config.page_not_found_method = "render_404"
   
   # Authentication
   # ===============

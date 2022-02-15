@@ -26,6 +26,7 @@ module Spina
                   :backend_path, 
                   :importmap,
                   :frontend_parent_controller,
+                  :page_not_found_method,
                   :disable_frontend_routes,
                   :disable_decorator_load,
                   :locales, 
@@ -48,6 +49,7 @@ module Spina
   self.mailer_defaults = ActiveSupport::OrderedOptions.new
   self.thumbnail_image_size = [400, 400]
   self.frontend_parent_controller = "ApplicationController"
+  self.page_not_found_method = "render_404"
   self.locales = [I18n.default_locale]
   self.party_pooper = false
   self.transliterations = %i(latin)

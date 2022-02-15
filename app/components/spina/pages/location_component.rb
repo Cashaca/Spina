@@ -8,7 +8,6 @@ module Spina::Pages
     end
     
     def resources
-      puts @page.inspect
       [main_collection_option] + Spina::Resource.where(account_id: @page&.account).order(:label).map do |resource|
         [ resource.label, resource.id, data: {
           parent_pages_url:  helpers.spina.admin_parent_pages_path(resource_id: resource.id)

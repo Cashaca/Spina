@@ -63,7 +63,8 @@ module Spina
         if rule = RewriteRule.find_by(old_path: spina_request_path)
           redirect_to rule.new_path, status: :moved_permanently
         else
-          render_404
+          send(Spina.page_not_found_method)
+          # render_404 
         end
       end
 
