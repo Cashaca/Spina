@@ -32,7 +32,7 @@ Spina.configure do |config|
   # Defaults to ApplicationController
   # config.frontend_parent_controller = "ApplicationController"
 
-   # Parent controller
+  # Page not found method
   # ===============
   # The method called if a page is not found in the PagesController
   # Defaults to render_404

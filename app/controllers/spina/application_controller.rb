@@ -19,6 +19,7 @@ private
     end
     Spina::Current.account ||= Spina::Account.first
     Spina::Current.account.view_context = view_context
+    Spina::Current.account = Spina::Account.first
     return Spina::Current.account
   end
 end
