@@ -32,7 +32,7 @@ module Spina
         end
 
         def current_account
-          puts "current_account"
+          puts "current_account ADMIN"
           puts "cookies[:current_account_id: #{cookies[:current_account_id]}"
           Spina::Current.account = nil
           if cookies[:current_account_id]
